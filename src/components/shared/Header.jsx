@@ -1,8 +1,34 @@
 import { Link } from 'react-router-dom';
 import { CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
 import './Header.css';
+import {
+  getAnalyticsFn,
+  onUserStateChanged,
+  signInFn,
+  signOutFn,
+} from '../../api/firebase';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
+  const [user, setUser] = useState(null);
+  console.log(user);
+
+  const signInBtnHandler = async () => {
+    const user = await signInFn();
+    setUser(user);
+  };
+
+  const signOutBtnHandler = async () => {
+    await signOutFn();
+    setUser(null);
+  };
+
+  useEffect(() => {
+    onUserStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
+
   return (
     <header className='header'>
       <nav className='navbar'>
@@ -26,15 +52,20 @@ export default function Header() {
 
       <nav className='navbar'>
         <ul className='nav right'>
-          <li>Magazine</li>
           <li className='icon-menu'>
             <CiSearch className='icon' />
             Search
           </li>
-          <li className='icon-menu'>
-            <CiUser className='icon' />
-            Sign In
-          </li>
+          {!user ? (
+            <li className='icon-menu' onClick={signInBtnHandler}>
+              <CiUser className='icon' />
+              Sign In
+            </li>
+          ) : (
+            <li className='icon-menu sign-out' onClick={signOutBtnHandler}>
+              <CiUser className='icon' /> Sign Out
+            </li>
+          )}
           <li>
             <Link to='/cart' className='icon-menu'>
               <CiShoppingCart className='icon' />

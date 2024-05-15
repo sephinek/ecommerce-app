@@ -40,6 +40,11 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  cursor: pointer;
+}
+
+.icon-menu.sign-out {
+  color: var(--color-brand);
 }
 
 .icon {
