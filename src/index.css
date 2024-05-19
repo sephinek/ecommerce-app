@@ -38,3 +38,15 @@ a {
   text-decoration: none;
   color: var(--color-black);
 }
+
+button {
+  display: inline-block;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.heading-secondary {
+  font-weight: 600;
+  font-size: 1.5rem;
+}

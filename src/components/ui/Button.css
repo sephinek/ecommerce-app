@@ -1,0 +1,18 @@
+.btn {
+  background-color: var(--color-brand);
+  color: #fff;
+  padding: 1rem 6rem;
+  align-self: center;
+  border-radius: 2px;
+  margin-top: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.btn:hover {
+  filter: brightness(110%);
+  box-shadow: -1px 1px 5px rgb(190, 190, 190);
+  transform: translate(1px, 1px);
+}

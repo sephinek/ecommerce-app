@@ -9,16 +9,21 @@ import AllProducts from './pages/AllProducts';
 import NewProduct from './pages/NewProduct';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import ProtectedRoute from './pages/ProtectedRoute';
+import Search from './pages/Search.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Error />,
     children: [
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'search',
+        element: <Search />,
       },
       {
         path: 'products',
@@ -26,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'products/new',
-        element: <NewProduct />,
+        element: (
+          <ProtectedRoute requireAdmin>
+            <NewProduct />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'products/:id',
@@ -34,7 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

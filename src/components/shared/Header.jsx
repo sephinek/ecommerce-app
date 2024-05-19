@@ -1,33 +1,10 @@
 import { Link } from 'react-router-dom';
-import { CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
+import { CiEdit, CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
 import './Header.css';
-import {
-  getAnalyticsFn,
-  onUserStateChanged,
-  signInFn,
-  signOutFn,
-} from '../../api/firebase';
-import { useEffect, useState } from 'react';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Header() {
-  const [user, setUser] = useState(null);
-  console.log(user);
-
-  const signInBtnHandler = async () => {
-    const user = await signInFn();
-    setUser(user);
-  };
-
-  const signOutBtnHandler = async () => {
-    await signOutFn();
-    setUser(null);
-  };
-
-  useEffect(() => {
-    onUserStateChanged((user) => {
-      setUser(user);
-    });
-  }, []);
+  const { user, signInFn, signOutFn } = useAuthContext();
 
   return (
     <header className='header'>
@@ -52,17 +29,23 @@ export default function Header() {
 
       <nav className='navbar'>
         <ul className='nav right'>
-          <li className='icon-menu'>
+          <Link to='/search' className='icon-menu'>
             <CiSearch className='icon' />
             Search
-          </li>
+          </Link>
+          {user && user.isAdmin && (
+            <Link to='/products/new' className='icon-menu'>
+              <CiEdit className='icon' />
+              New
+            </Link>
+          )}
           {!user ? (
-            <li className='icon-menu' onClick={signInBtnHandler}>
+            <li className='icon-menu' onClick={signInFn}>
               <CiUser className='icon' />
               Sign In
             </li>
           ) : (
-            <li className='icon-menu sign-out' onClick={signOutBtnHandler}>
+            <li className='icon-menu sign-out' onClick={signOutFn}>
               <CiUser className='icon' /> Sign Out
             </li>
           )}
