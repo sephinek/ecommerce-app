@@ -6,9 +6,10 @@ import {
   signOut,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { getDatabase, ref, get, child, update } from 'firebase/database';
+import { getDatabase, ref, get, set, child } from 'firebase/database';
 import { getAnalytics, logEvent } from 'firebase/analytics';
 import { redirect } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -26,6 +27,7 @@ const analytics = getAnalytics(app);
 
 const provider = new GoogleAuthProvider();
 
+const db = getDatabase();
 const dbRef = ref(getDatabase());
 const auth = getAuth();
 
@@ -58,31 +60,20 @@ async function isAdminUser(user) {
     .catch(console.error);
 }
 
-export function addNewProduct({
-  image,
-  category,
-  name,
-  price,
-  size,
-  colors,
-  description,
-}) {
-  const newProduct = {
-    image,
+export async function addNewProduct(product, imageUrl) {
+  const { category, name, price, size, colors, description } = product;
+  const productId = uuidv4();
+
+  return set(ref(db, 'products/' + productId), {
+    id: productId,
     category,
     name,
-    price,
-    size,
-    colors,
+    price: parseInt(price),
+    size: size.split(','),
+    colors: colors.split(','),
     description,
-  };
-
-  const newProductKey = push(child(ref(db), 'products')).key;
-
-  const updates = {};
-  updates['/products' + newProductKey] = newProduct;
-
-  return update(ref(db), updates);
+    image: imageUrl,
+  });
 }
 
 export function getAnalyticsFn() {

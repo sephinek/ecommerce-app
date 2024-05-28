@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
-import Footer from './components/shared/Footer';
 import Header from './components/shared/Header';
-import { AuthContextProvider } from './components/context/AuthContext';
+import Footer from './components/shared/Footer';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   return (

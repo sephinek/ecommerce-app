@@ -13,6 +13,10 @@
 
 .btn:hover {
   filter: brightness(110%);
-  box-shadow: -1px 1px 5px rgb(190, 190, 190);
-  transform: translate(1px, 1px);
+  transform: translateY(1px);
+  background: var(--color-brand);
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
 }

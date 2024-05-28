@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CiEdit, CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
 import './Header.css';
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 
 export default function Header() {
   const { user, signInFn, signOutFn } = useAuthContext();

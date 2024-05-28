@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './NewProduct.css';
 import Button from '../components/ui/Button';
 import { uploadImage } from '../api/cloudinary';
+import { addNewProduct } from '../api/firebase';
 
 export default function NewProduct() {
   const [imageFile, setImageFile] = useState();
-  const [formData, setFormData] = useState({
+  const [product, setProduct] = useState({
     category: '',
     name: '',
     price: '',
@@ -13,25 +14,44 @@ export default function NewProduct() {
     colors: '',
     description: '',
   });
+  const [isUploading, setIsUploading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState();
 
   const changeHandler = (e) => {
     const { name, value, files } = e.target;
     if (name === 'image') {
       setImageFile(files[0]);
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setProduct((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    uploadImage(imageFile).then(console.log);
+    setIsUploading(true);
+
+    uploadImage(imageFile)
+      .then((url) => {
+        addNewProduct(product, url) //
+          .then(() => {
+            setSuccessMessage('Product added successfully.');
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 4000);
+          });
+      })
+      .finally(() => {
+        setIsUploading(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
   };
 
   return (
     <section className='section'>
       <h2 className='heading-secondary'>Add New Product</h2>
+
+      {successMessage && <p className='success-message'>{successMessage}</p>}
 
       {imageFile && (
         <img
@@ -72,7 +92,7 @@ export default function NewProduct() {
             type='text'
             name='name'
             id='name'
-            value={formData.name}
+            value={product.name}
             onChange={changeHandler}
             required
           />
@@ -85,7 +105,7 @@ export default function NewProduct() {
             min={1}
             name='price'
             id='price'
-            value={formData.price}
+            value={product.price}
             onChange={changeHandler}
             required
           />
@@ -98,7 +118,7 @@ export default function NewProduct() {
             name='size'
             id='size'
             placeholder='Separate with comma(,)'
-            value={formData.size}
+            value={product.size}
             onChange={changeHandler}
             required
           />
@@ -111,7 +131,7 @@ export default function NewProduct() {
             name='colors'
             id='colors'
             placeholder='Separate with comma(,)'
-            value={formData.colors}
+            value={product.colors}
             onChange={changeHandler}
             required
           />
@@ -124,13 +144,16 @@ export default function NewProduct() {
             id='description'
             rows={5}
             cols={40}
-            value={formData.description}
+            value={product.description}
             onChange={changeHandler}
             required
           ></textarea>
         </label>
 
-        <Button text='Add' />
+        <Button
+          text={isUploading ? 'Uploading...' : 'Add'}
+          disabled={isUploading}
+        />
       </form>
     </section>
   );
