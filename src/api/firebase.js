@@ -76,6 +76,20 @@ export async function addNewProduct(product, imageUrl) {
   });
 }
 
+export async function getAllProducts() {
+  return get(child(dbRef, 'products'))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      } else {
+        return [];
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 export function getAnalyticsFn() {
   return logEvent(analytics, 'notification_received');
 }

@@ -4,13 +4,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import './index.css';
-import Error from './pages/Error';
 import AllProducts from './pages/AllProducts';
 import NewProduct from './pages/NewProduct';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Search from './pages/Search.jsx';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+        errorElement: <NotFound />,
       },
       {
         path: 'search',
