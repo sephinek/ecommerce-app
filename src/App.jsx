@@ -13,7 +13,9 @@ function App() {
       <AuthContextProvider>
         <section className='container'>
           <Header />
-          <Outlet />
+          <main>
+            <Outlet />
+          </main>
           <Footer />
         </section>
       </AuthContextProvider>

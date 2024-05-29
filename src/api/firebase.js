@@ -61,7 +61,7 @@ async function isAdminUser(user) {
 }
 
 export async function addNewProduct(product, imageUrl) {
-  const { category, name, price, size, colors, description } = product;
+  const { category, name, price, size, color, description } = product;
   const productId = uuidv4();
 
   return set(ref(db, 'products/' + productId), {
@@ -70,7 +70,7 @@ export async function addNewProduct(product, imageUrl) {
     name,
     price: parseInt(price),
     size: size.split(','),
-    colors: colors.split(','),
+    color: color.split(','),
     description,
     image: imageUrl,
   });

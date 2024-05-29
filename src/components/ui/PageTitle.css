@@ -1,5 +1,11 @@
 .page-title {
   font-weight: 600;
   font-size: 1.4rem;
-  margin: 0 0 2rem 1rem;
+  margin: 0 0 1rem 1rem;
+}
+
+.divider {
+  border-bottom: 1px solid var(--color-medium-grey);
+  width: 100%;
+  margin-bottom: 3rem;
 }

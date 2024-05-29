@@ -5,9 +5,12 @@
   font-size: 13px;
   font-weight: 500;
   --color-black: #4b4b4b;
+  --color-black-opacity: #00000046;
   --color-brand: #153e6e;
+  --color-brand-opacity: #153e6e45;
   --color-grey: #aeb5bb;
   --color-light-grey: #f8f9fa;
+  --color-medium-grey: #cdd2d6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -51,4 +54,5 @@ button {
 .heading-secondary {
   font-weight: 600;
   font-size: 1.5rem;
+  margin-top: 2%;
 }

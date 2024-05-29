@@ -11,7 +11,7 @@ export default function NewProduct() {
     name: '',
     price: '',
     size: '',
-    colors: '',
+    color: '',
     description: '',
   });
   const [isUploading, setIsUploading] = useState(false);
@@ -102,6 +102,7 @@ export default function NewProduct() {
           Price:
           <input
             type='number'
+            step='0.01'
             min={1}
             name='price'
             id='price'
@@ -124,14 +125,14 @@ export default function NewProduct() {
           />
         </label>
 
-        <label htmlFor='colors' className='label'>
-          Colors:
+        <label htmlFor='color' className='label'>
+          Color:
           <input
             type='text'
-            name='colors'
-            id='colors'
+            name='color'
+            id='color'
             placeholder='Separate with comma(,)'
-            value={product.colors}
+            value={product.color}
             onChange={changeHandler}
             required
           />
