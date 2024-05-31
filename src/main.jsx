@@ -10,6 +10,7 @@ import Cart from './pages/Cart';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Search from './pages/Search.jsx';
 import NotFound from './pages/NotFound';
+import CartLogin from './pages/CartSignin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      { path: 'cart', element: <CartLogin /> },
     ],
   },
 ]);

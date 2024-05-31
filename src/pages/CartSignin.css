@@ -1,0 +1,15 @@
+.cart-signin {
+  text-align: center;
+  margin: 10rem 0 3rem 0;
+  font-size: 1.1rem;
+}
+
+.cart-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cart-signin-btn {
+  width: 20rem;
+}
