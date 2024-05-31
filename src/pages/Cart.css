@@ -22,6 +22,10 @@
   gap: 4rem;
 }
 
+.continue-shopping-btn {
+  width: 20rem;
+}
+
 .cart .cart-heading {
   font-size: 1.2rem;
   font-weight: 500;

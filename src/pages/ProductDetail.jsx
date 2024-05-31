@@ -2,8 +2,8 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import './ProductDetail.css';
 import Button from '../components/ui/Button';
-import { addOrUpdateCart } from '../api/firebase';
 import { useAuthContext } from '../context/AuthContext';
+import useCart from '../hooks/useCart';
 
 export default function ProductDetail() {
   const {
@@ -16,6 +16,7 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState(null);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+  const { addOrUpdateItem } = useCart();
 
   const changeHandler = (e) => {
     setSelectedColor(e.target.value);
@@ -25,8 +26,11 @@ export default function ProductDetail() {
     setSelectedSize(e.target.value);
   };
 
-  const addToCartHandler = async () => {
-    if (!selectedColor && !selectedSize) {
+  const addToCartHandler = () => {
+    if (!user) {
+      setError('Please sign in to use your shopping cart.');
+      return;
+    } else if (!selectedColor && !selectedSize) {
       setError('Please select your color and size.');
     } else if (!selectedColor) {
       setError('Please select your color.');
@@ -45,9 +49,9 @@ export default function ProductDetail() {
         quantity: 1,
       };
 
-      addOrUpdateCart(user.uid, addedItem)
-        .then(() => setError(''))
-        .then(() => setSuccess('Successfully Added!'));
+      addOrUpdateItem.mutate(addedItem);
+      setError('');
+      setSuccess('Item is successfully added!');
     }
   };
 
@@ -95,9 +99,9 @@ export default function ProductDetail() {
           <p className='product-description'>{description}</p>
         </div>
         <div className='add-to-cart-btn' onClick={addToCartHandler}>
-          <Button text='Add to Cart' />
           {success && <p className='success-message'>{success}</p>}
           {error && <p className='error-message'>{error}</p>}
+          <Button text='Add to Cart' />
         </div>
       </div>
     </section>

@@ -1,17 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import { useAuthContext } from '../context/AuthContext';
-import { addOrUpdateCart, deleteFromCart, getCart } from '../api/firebase';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 import Loading from '../components/shared/Loading';
 import Button from '../components/ui/Button';
-import { Link } from 'react-router-dom';
+import useCart from '../hooks/useCart';
 
 export default function Cart() {
-  const { user } = useAuthContext();
-  const { isLoading, data: products } = useQuery({
-    queryKey: ['cart'],
-    queryFn: () => getCart(user.uid),
-  });
+  const {
+    cartQuery: { isLoading, data: products },
+    addOrUpdateItem,
+    deleteItem,
+  } = useCart();
 
   const hasProducts = products && products.length > 0;
 
@@ -29,14 +27,14 @@ export default function Cart() {
     if (e.target.textContent === '-') {
       if (product.quantity <= 1) return;
       else
-        addOrUpdateCart(user.uid, {
+        addOrUpdateItem.mutate({
           ...product,
           quantity: product.quantity - 1,
         });
     } else if (e.target.textContent === '+') {
-      addOrUpdateCart(user.uid, { ...product, quantity: product.quantity + 1 });
+      addOrUpdateItem.mutate({ ...product, quantity: product.quantity + 1 });
     } else {
-      deleteFromCart(user.uid, product.id);
+      deleteItem.mutate(product.id);
     }
   };
 
@@ -49,9 +47,11 @@ export default function Cart() {
         {!isLoading && !hasProducts && (
           <>
             <p>Your shopping cart is empty.</p>
-            <Link to='/'>
-              <Button text='Continue shopping' />
-            </Link>
+            <div className='continue-shopping-btn'>
+              <Link to='/'>
+                <Button text='Continue shopping' />
+              </Link>
+            </div>
           </>
         )}
         {hasProducts && (

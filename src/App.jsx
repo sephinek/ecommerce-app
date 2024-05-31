@@ -5,7 +5,13 @@ import Header from './components/shared/Header';
 import Footer from './components/shared/Footer';
 import { AuthContextProvider } from './context/AuthContext';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (

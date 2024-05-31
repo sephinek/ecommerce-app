@@ -1,14 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { getCart } from '../../api/firebase';
 import './CartBadge.css';
-import { useAuthContext } from '../../context/AuthContext';
+import useCart from '../../hooks/useCart';
 
 export default function CartBadge() {
-  const { user } = useAuthContext();
-  const { data: products } = useQuery({
-    queryKey: ['cart'],
-    queryFn: () => getCart(user.uid),
-  });
+  const {
+    cartQuery: { data: products },
+  } = useCart();
 
   return (
     <>
