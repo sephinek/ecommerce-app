@@ -27,6 +27,10 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
+        path: 'search/products/:productId',
+        element: <ProductDetail />,
+      },
+      {
         path: 'products/new',
         element: (
           <ProtectedRoute requireAdmin>
