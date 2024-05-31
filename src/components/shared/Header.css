@@ -50,3 +50,7 @@
 .icon {
   font-size: 20px;
 }
+
+.cart-box {
+  position: relative;
+}

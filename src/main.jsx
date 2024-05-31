@@ -43,7 +43,7 @@ const router = createBrowserRouter([
         element: <ProductDetail />,
       },
       {
-        path: 'cart',
+        path: 'cart/:uid',
         element: (
           <ProtectedRoute>
             <Cart />

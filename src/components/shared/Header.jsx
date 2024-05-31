@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CiEdit, CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
 import './Header.css';
 import { useAuthContext } from '../../context/AuthContext';
+import CartBadge from '../ui/CartBadge';
 
 export default function Header() {
   const { user, signInFn, signOutFn } = useAuthContext();
@@ -50,8 +51,14 @@ export default function Header() {
             </li>
           )}
           <li>
-            <Link to='/cart' className='icon-menu'>
-              <CiShoppingCart className='icon' />
+            <Link
+              to={user ? `/cart/${user.uid}` : '/cart'}
+              className='icon-menu'
+            >
+              <div className='cart-box'>
+                <CiShoppingCart className='icon' />
+                <CartBadge />
+              </div>
               Cart
             </Link>
           </li>

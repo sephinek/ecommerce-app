@@ -6,7 +6,7 @@ import {
   signOut,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { getDatabase, ref, get, set, child } from 'firebase/database';
+import { getDatabase, ref, get, set, child, remove } from 'firebase/database';
 import { getAnalytics, logEvent } from 'firebase/analytics';
 import { redirect } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -64,7 +64,7 @@ export async function addNewProduct(product, imageUrl) {
   const { category, name, price, size, color, description } = product;
   const productId = uuidv4();
 
-  return set(ref(db, 'products/' + productId), {
+  return set(ref(db, `products/${productId}`), {
     id: productId,
     category,
     name,
@@ -85,9 +85,37 @@ export async function getAllProducts() {
         return [];
       }
     })
-    .catch((error) => {
-      console.error(error);
-    });
+    .catch(console.error);
+}
+
+export async function getCart(userId) {
+  return get(child(dbRef, `cart/${userId}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        return Object.values(snapshot.val());
+      } else {
+        return [];
+      }
+    })
+    .catch(console.error);
+}
+
+export async function addOrUpdateCart(userId, product) {
+  const { id, name, price, size, color, image, quantity } = product;
+
+  return set(ref(db, `cart/${userId}/${id}`), {
+    id,
+    name,
+    price: parseInt(price),
+    size,
+    color,
+    image,
+    quantity,
+  }).catch((err) => console.error(err));
+}
+
+export async function deleteFromCart(userId, productId) {
+  return remove(ref(db, `cart/${userId}/${productId}`));
 }
 
 export function getAnalyticsFn() {

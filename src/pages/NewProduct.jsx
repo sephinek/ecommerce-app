@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './NewProduct.css';
 import Button from '../components/ui/Button';
 import { uploadImage } from '../api/cloudinary';
-import { addNewProduct } from '../api/firebase';
+import useProducts from '../hooks/useProducts';
 
 export default function NewProduct() {
   const [imageFile, setImageFile] = useState();
@@ -16,6 +16,7 @@ export default function NewProduct() {
   });
   const [isUploading, setIsUploading] = useState(false);
   const [successMessage, setSuccessMessage] = useState();
+  const { addProduct } = useProducts();
 
   const changeHandler = (e) => {
     const { name, value, files } = e.target;
@@ -33,13 +34,17 @@ export default function NewProduct() {
 
     uploadImage(imageFile)
       .then((url) => {
-        addNewProduct(product, url) //
-          .then(() => {
-            setSuccessMessage('Product added successfully.');
-            setTimeout(() => {
-              setSuccessMessage(null);
-            }, 4000);
-          });
+        addProduct.mutate(
+          { product, url },
+          {
+            onSuccess: () => {
+              setSuccessMessage('Product added successfully.');
+              setTimeout(() => {
+                setSuccessMessage(null);
+              }, 4000);
+            },
+          }
+        );
       })
       .finally(() => {
         setIsUploading(false);
