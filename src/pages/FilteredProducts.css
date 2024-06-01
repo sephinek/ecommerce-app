@@ -1,0 +1,8 @@
+.filtered-products {
+  margin-top: 2rem;
+}
+
+.filtered-products .coming-soon {
+  text-align: center;
+  font-size: 1.2rem;
+}

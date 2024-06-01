@@ -1,6 +1,6 @@
 import Banner from '../components/ui/Banner';
 import './Home.css';
-import AllProducts from './AllProducts';
+import Products from './Products';
 import PageTitle from '../components/ui/PageTitle';
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Banner />
       <PageTitle text='All Products' />
-      <AllProducts />
+      <Products />
     </>
   );
 }

@@ -3,22 +3,48 @@ import { CiEdit, CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
 import './Header.css';
 import { useAuthContext } from '../../context/AuthContext';
 import CartBadge from '../ui/CartBadge';
+import useProducts from '../../hooks/useProducts';
 
 export default function Header() {
   const { user, signInFn, signOutFn } = useAuthContext();
+  const {
+    productsQuery: { data: products },
+  } = useProducts();
 
   return (
     <header className='header'>
       <nav className='navbar'>
         <ul className='nav left'>
           <li>
-            <Link to='/products'>New Arrivals</Link>
+            <Link to='/new' state={{ products }}>
+              New Arrivals
+            </Link>
           </li>
-          <li>Tops</li>
-          <li>Bottoms</li>
-          <li>Outers</li>
-          <li>Shoes</li>
-          <li>Accessories</li>
+          <li>
+            <Link to='/top' state={{ products }}>
+              Tops
+            </Link>
+          </li>
+          <li>
+            <Link to='/bottom' state={{ products }}>
+              Bottoms
+            </Link>
+          </li>
+          <li>
+            <Link to='/outer' state={{ products }}>
+              Outers
+            </Link>
+          </li>
+          <li>
+            <Link to='/shoes' state={{ products }}>
+              Shoes
+            </Link>
+          </li>
+          <li>
+            <Link to='/accessories' state={{ products }}>
+              Accessories
+            </Link>
+          </li>
         </ul>
       </nav>
 

@@ -11,6 +11,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import Search from './pages/Search.jsx';
 import NotFound from './pages/NotFound';
 import CartLogin from './pages/CartSignin.jsx';
+import FilteredProducts from './pages/FilteredProducts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: ':category',
+        element: <FilteredProducts />,
+      },
+      {
+        path: ':category/products/:productId',
+        element: <ProductDetail />,
       },
       {
         path: 'search',

@@ -1,10 +1,10 @@
 import Loading from '../components/shared/Loading';
 import Error from '../components/shared/Error';
 import ProductCard from '../components/ui/ProductCard';
-import './AllProducts.css';
+import './Products.css';
 import useProducts from '../hooks/useProducts';
 
-export default function AllProducts() {
+export default function Products() {
   const {
     productsQuery: { isLoading, error, data: products },
   } = useProducts();
