@@ -12,12 +12,14 @@ export default function FilteredProducts() {
   const { category } = useParams();
 
   useEffect(() => {
-    const filtered =
-      (products &&
-        products.filter(
-          (product) => product.category.toLowerCase() === category.toLowerCase()
-        )) ||
-      [];
+    let filtered = [];
+    if (products && category === 'new') {
+      filtered = [...products];
+    } else {
+      filtered = products.filter(
+        (product) => product.category.toLowerCase() === category.toLowerCase()
+      );
+    }
     setFilteredProducts(filtered);
   }, [category]);
 
