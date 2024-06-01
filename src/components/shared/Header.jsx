@@ -50,7 +50,7 @@ export default function Header() {
 
       <div className='logo'>
         <Link to='/'>
-          <img className='logo-img' src='/src/assets/logo.png' />
+          <img className='logo-img' src='/public/logo.png' />
         </Link>
       </div>
 
