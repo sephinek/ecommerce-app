@@ -125,7 +125,7 @@ export default function Cart() {
                 </div>
                 <Button text='Proceed to checkout' />
                 <div className='payment-methods'>
-                  <img src='/public/payment-method.png' alt='Payment Methods' />
+                  <img src='/payment-method.png' alt='Payment Methods' />
                 </div>
               </div>
             </div>
