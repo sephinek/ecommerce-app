@@ -1,15 +1,28 @@
 import { Link } from 'react-router-dom';
-import { CiEdit, CiSearch, CiShoppingCart, CiUser } from 'react-icons/ci';
+import {
+  CiEdit,
+  CiSearch,
+  CiShoppingCart,
+  CiUser,
+  CiMenuBurger,
+  CiMenuFries,
+} from 'react-icons/ci';
 import './Header.css';
 import { useAuthContext } from '../../context/AuthContext';
 import CartBadge from '../ui/CartBadge';
 import useProducts from '../../hooks/useProducts';
+import { useState } from 'react';
 
 export default function Header() {
   const { user, signInFn, signOutFn } = useAuthContext();
   const {
     productsQuery: { data: products },
   } = useProducts();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleMobileMenu = () => {
+    setIsMobileMenuOpen((open) => !open);
+  };
 
   return (
     <header className='header'>
@@ -46,6 +59,49 @@ export default function Header() {
             </Link>
           </li>
         </ul>
+
+        <div className='nav mobile'>
+          {isMobileMenuOpen ? (
+            <CiMenuFries
+              className='icon'
+              style={{ scale: '-1' }}
+              onClick={handleMobileMenu}
+            />
+          ) : (
+            <CiMenuBurger className='icon' onClick={handleMobileMenu} />
+          )}
+
+          {
+            <nav
+              className={`mobile-left ${
+                isMobileMenuOpen ? 'opened' : 'closed'
+              }`}
+            >
+              <Link to='/new' className='menu-item' state={{ products }}>
+                New Arrivals
+              </Link>
+              <Link to='/top' className='menu-item' state={{ products }}>
+                Tops
+              </Link>
+              <Link to='/bottom' className='menu-item' state={{ products }}>
+                Bottoms
+              </Link>
+              <Link to='/outer' className='menu-item' state={{ products }}>
+                Outers
+              </Link>
+              <Link to='/shoes' className='menu-item' state={{ products }}>
+                Shoes
+              </Link>
+              <Link
+                to='/accessories'
+                className='menu-item'
+                state={{ products }}
+              >
+                Accessories
+              </Link>
+            </nav>
+          }
+        </div>
       </nav>
 
       <div className='logo'>
@@ -56,24 +112,25 @@ export default function Header() {
 
       <nav className='navbar'>
         <ul className='nav right'>
-          <Link to='/search' className='icon-menu'>
+          <Link to='/search' className='icon-menu search'>
             <CiSearch className='icon' />
-            Search
+            <span className='icon-menu-text'>Search</span>
           </Link>
           {user && user.isAdmin && (
             <Link to='/products/new' className='icon-menu'>
               <CiEdit className='icon' />
-              New
+              <span className='icon-menu-text'>New</span>
             </Link>
           )}
           {!user ? (
             <li className='icon-menu' onClick={signInFn}>
               <CiUser className='icon' />
-              Sign In
+              <span className='icon-menu-text'>Sign In</span>
             </li>
           ) : (
             <li className='icon-menu sign-out' onClick={signOutFn}>
-              <CiUser className='icon' /> Sign Out
+              <CiUser className='icon' />
+              <span className='icon-menu-text'>Sign Out</span>
             </li>
           )}
           <li>
@@ -85,7 +142,7 @@ export default function Header() {
                 <CiShoppingCart className='icon' />
                 <CartBadge />
               </div>
-              Cart
+              <span className='icon-menu-text'>Cart</span>
             </Link>
           </li>
         </ul>

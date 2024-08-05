@@ -24,3 +24,75 @@
   background-color: var(--color-brand-opacity);
   line-height: 1.5;
 }
+
+@media (max-width: 950px) {
+  .banner {
+    height: 25rem;
+    margin-bottom: 3rem;
+  }
+
+  .carousel-sentence-box {
+    top: 45%;
+    font-size: 1.3rem;
+    padding: 2rem 4rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .banner {
+    height: 20rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-sentence-box {
+    font-size: 1.2rem;
+    padding: 2rem 4rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .banner {
+    height: 15rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-sentence-box {
+    top: 40%;
+    font-size: 1.1rem;
+    padding: 1rem 4rem;
+  }
+}
+
+@media (max-width: 570px) {
+  .banner {
+    height: 15rem;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-sentence-box {
+    top: 45%;
+    font-size: 1.1rem;
+    padding: 1rem 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner {
+    height: 15rem;
+    margin-bottom: 1rem;
+  }
+
+  .carousel-sentence-box {
+    display: none;
+  }
+}
+
+@media (max-width: 410px) {
+  .banner {
+    margin-bottom: 0;
+  }
+
+  .carousel-sentence-box {
+    display: none;
+  }
+}

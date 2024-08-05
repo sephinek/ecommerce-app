@@ -9,6 +9,10 @@
   padding: 0 12px;
 }
 
+.nav.mobile {
+  display: none;
+}
+
 .logo {
   position: absolute;
   top: 50%;
@@ -53,4 +57,86 @@
 
 .cart-box {
   position: relative;
+}
+
+@media (max-width: 1080px) {
+  .navbar .nav.left {
+    display: none;
+  }
+
+  .nav.mobile {
+    display: block;
+  }
+
+  .mobile-left {
+    z-index: 10;
+    position: absolute;
+    top: 100%;
+    left: -2000%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 900px) {
+  .mobile-left.opened {
+    animation: slideIn 350ms ease-in-out;
+    left: 0;
+  }
+
+  .mobile-left.closed {
+    animation: slideOut 350ms ease-in-out;
+  }
+
+  .mobile-left .menu-item,
+  .mobile-left .menu-item a {
+    color: #5c5d65;
+    font-size: 1.1rem;
+    padding: 3rem 10rem 3rem 5rem;
+    border-bottom: 1px solid #fff;
+    background-color: #e8e8e8ee;
+  }
+
+  .mobile-left .menu-item:active {
+    background-color: #5c5d65;
+    color: #e8e8e8ee;
+  }
+
+  .icon-menu-text {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav.right {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 490px) {
+  .nav.right {
+    gap: 5px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    left: -2000%;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: -2000%;
+  }
 }

@@ -90,3 +90,62 @@
   position: absolute;
   top: -2rem;
 }
+
+@media (max-width: 750px) {
+  .product-detail {
+    grid-template-areas:
+      'col-1'
+      'col-2';
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .product-detail .product-img {
+    max-height: 60vh;
+    width: 100%;
+  }
+
+  .product-detail .product-info {
+    font-size: 1.2rem;
+  }
+  .product-detail .product-price {
+    font-size: 1.2rem;
+  }
+
+  .color-dropdown {
+    max-width: 90%;
+  }
+
+  .size-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .product-info {
+    padding: 1rem 5rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .product-detail {
+    margin: 2rem 0;
+  }
+
+  .product-detail .product-img {
+    max-height: 50vh;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .product-info {
+    font-size: 1rem;
+    padding: 1rem 3em;
+  }
+}
+
+@media (max-width: 410px) {
+  .product-info {
+    padding: 1rem 1em;
+  }
+}
