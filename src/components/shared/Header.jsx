@@ -11,7 +11,7 @@ import './Header.css';
 import { useAuthContext } from '../../context/AuthContext';
 import CartBadge from '../ui/CartBadge';
 import useProducts from '../../hooks/useProducts';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Header() {
   const { user, signInFn, signOutFn } = useAuthContext();
@@ -19,10 +19,24 @@ export default function Header() {
     productsQuery: { data: products },
   } = useProducts();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
 
   const handleMobileMenu = () => {
     setIsMobileMenuOpen((open) => !open);
   };
+
+  const handleClickOutside = (e) => {
+    if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className='header'>
@@ -60,7 +74,7 @@ export default function Header() {
           </li>
         </ul>
 
-        <div className='nav mobile'>
+        <div className='nav mobile' ref={mobileMenuRef}>
           {isMobileMenuOpen ? (
             <CiMenuFries
               className='icon'
