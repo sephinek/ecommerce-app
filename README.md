@@ -18,14 +18,14 @@ Check out the live demo [here](https://not-tomorrow-ecommerce.netlify.app/).
 
 ## Features
 
-- ✅ **Authentication & Authorization**: Secure user authentication with Firebase, enabling user registration, login, and role-based access control.
-- ✅ **Route Navigation**: Seamless navigation between pages using React Router.
-- ✅ **Category Filtering**: Filter products by category to quickly find what you're looking for.
-- ✅ **Search Functionality**: Easily search for products by name or description.
-- ✅ **Product Creation**: Admins can create new products, including uploading images via Cloudinary.
-- ✅ **Cart Management**: Add, remove, and manage items in the shopping cart.
-- ✅ **Custom React Hooks**: Utilize custom hooks for improved code organization and maintainability.
-- ✅ **Protected Routes**: Implement protected routes to prevent unauthorized access to the cart and admin functionalities.
+✅ **Authentication & Authorization**: Secure user authentication with Firebase, enabling user registration, login, and role-based access control.  
+✅ **Route Navigation**: Seamless navigation between pages using React Router.  
+✅ **Category Filtering**: Filter products by category to quickly find what you're looking for.  
+✅ **Search Functionality**: Easily search for products by name or description.  
+✅ **Product Creation**: Admins can create new products, including uploading images via Cloudinary.  
+✅ **Cart Management**: Add, remove, and manage items in the shopping cart.  
+✅ **Custom React Hooks**: Utilize custom hooks for improved code organization and maintainability.  
+✅ **Protected Routes**: Implement protected routes to prevent unauthorized access to the cart and admin functionalities.  
 
 ## Usage
 
