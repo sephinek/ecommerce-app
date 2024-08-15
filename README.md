@@ -1,4 +1,4 @@
-# Not Tomorrow: Clothing E-commerce Website
+# Not Tomorrow🛍🛒: Clothing E-commerce Website
 
 Not Tomorrow is a full-stack, responsive e-commerce application designed for a clothing business. It features robust functionalities including authentication, authorization, route navigation, category filtering, search capabilities, product creation, and cart management.
 
